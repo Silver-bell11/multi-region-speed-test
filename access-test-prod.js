@@ -3,12 +3,12 @@ const fs = require('fs')
 //const path = require('path')
 
 const contentType = 'video/mp4'
-const body = fs.readFileSync('../../Downloads/test.mp4')
+const body = fs.readFileSync('./test.mp4')
 
 
 const putObject = (bucketName, region) => {
 
-  const key = `${bucketName}.mp`
+  const key = `${bucketName}.mp4`
 
   let params = {
     Bucket: bucketName,
@@ -35,7 +35,7 @@ const putObject = (bucketName, region) => {
 
 const getSignedUrl = async (bucketName, region) => {
   
-  const key = `${bucketName}.mp`
+  const key = `${bucketName}.mp4`
 
   const params = {
     Bucket: bucketName,
@@ -58,7 +58,7 @@ const getSignedUrl = async (bucketName, region) => {
 };
 
 const getObject = (bucketName, region) => {
-  const key = `${bucketName}.mp`
+  const key = `${bucketName}.mp4`
   return new Promise((resolve, reject) => {
     const ss3 = new aws.S3({ region });
     const params = {
@@ -77,7 +77,7 @@ const getObject = (bucketName, region) => {
 };
 
 const headObject = (bucketName, region) => {
-  const key = `${bucketName}.mp`
+  const key = `${bucketName}.mp4`
   const params = {
     Bucket: bucketName,
     Key: key
@@ -112,6 +112,7 @@ const argumentList = {
 }
 
 const start = async() => {
+
   for (const pr in argumentList ) {
     await putObject(argumentList[pr],pr)
     await getSignedUrl(argumentList[pr],pr)
