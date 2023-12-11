@@ -1,5 +1,8 @@
 const redis = require("redis")
 
+//for loop돌리는 동안 다른 API호출은 잘 되는지 확인
+const callApiTest = setInterval(()=>{console.log('--------')}, 100)
+
 const start = async() => {
   const client = await redis.createClient({url: 'redis://127.0.0.1:6379'})
   .on('error', err => console.log('Redis Client Error', err))
@@ -29,6 +32,7 @@ try {
 }  catch(err) {
   throw new Error(err)
 }
+clearInterval(callApiTest)
 }
 
 start()
